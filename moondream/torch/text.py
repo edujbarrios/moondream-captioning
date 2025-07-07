@@ -12,6 +12,7 @@ from .config import TextConfig
 def text_encoder(input_ids: torch.Tensor, w: nn.Module):
     return F.embedding(input_ids, w.wte)
 
+import math
 
 def attn(
     x: torch.Tensor,
@@ -23,11 +24,12 @@ def attn(
     n_kv_heads: int,
     position_ids: torch.Tensor,
     lora: Optional[dict],
+    return_attn: bool = False,  # Nuevo parámetro
 ):
     bsz, q_len, d_model = x.shape
     head_dim = d_model // n_heads
 
-    qkv_out = w.qkv(x)  # shape: (bsz, q_len, (n_heads + 2*n_kv_heads)*head_dim)
+    qkv_out = w.qkv(x)
     if lora is not None:
         qkv_out += F.linear(F.linear(x, lora["qkv"]["A"]), lora["qkv"]["B"])
     q_dim = n_heads * head_dim
@@ -45,10 +47,21 @@ def attn(
     if kv_cache is not None:
         k, v = kv_cache.update(position_ids, k, v)
 
-    out = F.scaled_dot_product_attention(
-        q, k, v, attn_mask=attn_mask, enable_gqa=n_heads != n_kv_heads
-    )
+    # Custom scaled dot-product attention with returnable weights
+    scores = torch.matmul(q, k.transpose(-2, -1)) / math.sqrt(head_dim)
+    scores = scores.masked_fill(~attn_mask[:, None, None, :], float('-inf'))
+    attn_weights = torch.softmax(scores, dim=-1)
+    out = torch.matmul(attn_weights, v)
     out = out.transpose(1, 2).reshape(bsz, q_len, d_model)
+
+    out0 = w.proj(out)
+    if lora is not None:
+        out1 = F.linear(F.linear(x, lora["proj"]["A"]), lora["proj"]["B"])
+        out = out0 + out1
+    else:
+        out = out0
+
+    return (out, attn_weights) if return_attn else out
 
     out0 = w.proj(out)
     if lora is not None:

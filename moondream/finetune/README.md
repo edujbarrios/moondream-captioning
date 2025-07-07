@@ -18,9 +18,6 @@ source .venv/bin/activate
 ```bash
 # Install base requirements
 pip install -r requirements.txt
-
-# Install finetuning specific dependencies
-pip install safetensors datasets bitsandbytes tqdm wandb einops
 ```
 
 ## Downloading the Base Model

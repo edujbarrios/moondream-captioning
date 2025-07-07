@@ -13,9 +13,9 @@ moondream = Moondream.from_pretrained(
     torch_dtype=dtype,
 ).to(device=device)
 moondream.eval()
-
-image1 = Image.open("assets/demo-1.jpg")
-image2 = Image.open("assets/demo-2.jpg")
+# Example on how to pass several images at once with different prompts
+image1 = Image.open("assets/example.jpg")
+image2 = Image.open("assets/example2.jpg")
 prompts = [
     "What is the girl doing?",
     "What color is the girl's hair?",
