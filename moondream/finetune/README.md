@@ -1,6 +1,6 @@
 # Finetuning Moondream 2B
 
-This readme will walk you through the process of finetuning the text and region encoders of the Moondream 2B model. 
+This readme will walk you through the process of finetuning Moondream for better cpationing on a given dataset. 
 
 > Make sure to run all commands from the root directory of the project.
 
@@ -8,7 +8,7 @@ This readme will walk you through the process of finetuning the text and region 
 
 ### Clone and Setup Environment
 ```bash
-git clone https://github.com/vikhyat/moondream
+git clone https://github.com/edujbarrios/moondream-captioning
 cd moondream
 python -m venv .venv
 source .venv/bin/activate
