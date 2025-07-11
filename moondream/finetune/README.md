@@ -61,7 +61,8 @@ We return a more detailed caption of the image then you would get from the base 
 
 ### Start Text Finetuning
 ```bash
-python -m moondream.finetune.finetune_text
+python -m moondream.finetune.example_doc_ft
+# python -m moondream.finetune.finetune_script_modified   DON'T USE THIS WAY BY NOW
 ```
 
 The process will output a finetuned version of Moondream into your save path. Example output: `models/moondream_text_finetuned.safetensors`.
