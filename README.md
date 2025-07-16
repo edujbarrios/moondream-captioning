@@ -13,4 +13,16 @@ This fork aims to:
 
 - NOT work straight-forward, it needs some previous setup, that will be detailed soon.
 
-You will see some **hugging face** scripts, but this fork is done to properly work using the `model.safetensors` and other fine-tuned models that are not available here.
+
+## Inference settings
+The inference settings can be modified in this file while testing the model (base and fine-tuned ones).
+```bash
+/moondream/torch/moondream.py
+```
+
+## Fine Tuning settings
+
+The fine tuning settings can be modified at:
+```bash
+moondream/finetune
+```

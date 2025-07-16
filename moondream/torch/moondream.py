@@ -46,7 +46,7 @@ ObjectSamplingSettings = TypedDict(
     total=False,
 )
 
-### settings modificables
+### inference settingsthat can be modified after the finetune
 DEFAULT_MAX_TOKENS = 768
 DEFAULT_TEMPERATURE = 0.5
 DEFAULT_TOP_P = 0.3
@@ -399,9 +399,8 @@ class MoondreamModel(nn.Module):
 
                 pos += 1
 
+# Temperature settings
 
-
-##### TEMPERATURA, cambiar para establecer temperatura.
                 if temperature == 0:
                     next_token = torch.argmax(logits_BV, dim=-1).unsqueeze(1)  # (1, 1)
                 else:
