@@ -1,0 +1,22 @@
+[
+  {
+    "image": "images/dog_in_field.jpg",
+    "description": "A brown dog is running through a green field under the bright sun."
+  },
+  {
+    "image": "images/children_playing_soccer.jpg",
+    "description": "Two children are playing soccer in the park on a sunny afternoon."
+  },
+  {
+    "image": "images/mountain_snow.jpg",
+    "description": "A snow-capped mountain stands beneath a clear blue sky."
+  },
+  {
+    "image": "images/black_cat_window.jpg",
+    "description": "A black cat is sitting on a window sill, looking outside."
+  },
+  {
+    "image": "images/city_night.jpg",
+    "description": "A bustling city skyline is illuminated by lights at night."
+  }
+]

@@ -1,12 +1,48 @@
 # Finetuning Moondream 2B
 
-This readme will walk you through the process of finetuning Moondream for better cpationing on a given dataset. 
+This readme will walk you through the process of finetuning Moondream for better captioning on a given dataset. 
 
 > Make sure to run all commands from the root directory of the project.
 
+
+# Check before initial setup
+## Fine Tuning settings
+
+The fine tuning settings can be modified at:
+```bash
+moondream/finetune
+```
+To Fine Tune a model, you must structure your dataset in the following format:
+
+### As JSON:
+
+```json
+[
+  {
+    "image": "images/dog_in_field.jpg",
+    "description": "A brown dog is running through a green field under the bright sun."
+  },
+  {
+    "image": "images/children_playing_soccer.jpg",
+    "description": "Two children are playing soccer in the park on a sunny afternoon."
+  }
+]
+
+
+### As JSONL: (The best format to use)
+
+```jsonl
+{"image": "images/dog_in_field.jpg", "description": "A brown dog is running through a green field under the bright sun."}
+{"image": "images/children_playing_soccer.jpg", "description": "Two children are playing soccer in the park on a sunny afternoon."}
+```jsonl
+{"image": "images/dog_in_field.jpg", "description": "A brown dog is running through a green field under the bright sun."}
+{"image": "images/children_playing_soccer.jpg", "description": "Two children are playing soccer in the park on a sunny afternoon."}
+```
+
+
 ## Initial Setup
 
-### Clone and Setup Environment
+### 1.1 Clone and Setup Environment (Linux)
 ```bash
 git clone https://github.com/edujbarrios/moondream-captioning
 cd moondream
@@ -14,7 +50,16 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-### Install Dependencies
+### 1.2 Clone and Setup Environment (Windows)
+```bash
+git clone https://github.com/edujbarrios/moondream-captioning
+cd moondream-captioning
+python -m venv .venv
+.venv\Scripts\activate
+.venv\Scripts\Activate.ps1
+```
+
+### Install Dependencies 
 ```bash
 # Install base requirements
 pip install -r requirements.txt
@@ -51,13 +96,7 @@ We return a more detailed caption of the image then you would get from the base 
 
 1. Double check that you've updated MODEL_PATH to point to the base moondream model in `moondream/finetune/finetune_text.py`
 2. Double check that the save path ends in `.safetensors`, otherwise the run will fail.
-> Navigate to line 150 in `moondream/finetune/finetune_text.py`,
-``` # Add save path
-    save_file(
-        model.state_dict(),
-        "moondream_finetune.safetensors", // update this line ex: "models/moondream_text_finetuned.safetensors"
-    )
-```
+
 
 ### Start Text Finetuning
 ```bash
