@@ -1,17 +1,13 @@
-# 🌔 moondream
+# Moondream Captioning 
 
+This repository contains the code and instructions for finetuning the Moondream model for image captioning tasks. Moondream is a powerful Vision-Language model (VLM).
 > [!NOTE]
 > *****All the original Moondream material corresponds to the original authors AND all the credits belong to them.*****
 >
 > *****This adaptation has only be made for specific research and academic porpuses.*****
 
-Moondream is a **tiny vision language model capabable of "describing" images.**
+Make sure to navigate to `/moondream` for more ongoing details
 
-This fork aims to:
-
-- Adapt moondream scripts to an specific academic and research use case in the **image-captioning** field.
-
-- NOT work straight-forward, it needs some previous setup, that will be detailed soon.
 
 
 
